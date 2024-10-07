@@ -10,7 +10,6 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -20,42 +19,38 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class GreatingAspect {
-    @Pointcut("execution(String com.david.springboot.app.aop.springboot_aop.services..*(..))")
-    private void greatingLoggerPointCut() {
-
-    }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("greatingLoggerPointCut()")
+    @Before("GreatingServicePointCuts.greatingLoggerPointCut()")
     public void loggerBefore(JoinPoint jPoint) {
         String method = jPoint.getSignature().getName();
         String args = Arrays.toString(jPoint.getArgs());
         logger.info("Antes " + method + " Con los argumentos " + args);
     }
 
-    @After("greatingLoggerPointCut()")
+    @After("GreatingServicePointCuts.greatingLoggerPointCut()")
     public void loggerAfter(JoinPoint jPoint) {
         String method = jPoint.getSignature().getName();
         String args = Arrays.toString(jPoint.getArgs());
         logger.info("Despues " + method + " Con los argumentos " + args);
     }
 
-    @AfterReturning("greatingLoggerPointCut()")
+    @AfterReturning("GreatingServicePointCuts.greatingLoggerPointCut()")
     public void loggerAfterReturning(JoinPoint jPoint) {
         String method = jPoint.getSignature().getName();
         String args = Arrays.toString(jPoint.getArgs());
         logger.info("Despues retornar la excepcion " + method + " Con los argumentos " + args);
     }
 
-    @AfterThrowing("greatingLoggerPointCut()")
+    @AfterThrowing("GreatingServicePointCuts.greatingLoggerPointCut()")
     public void loggerAfterThowing(JoinPoint jPoint) {
         String method = jPoint.getSignature().getName();
         String args = Arrays.toString(jPoint.getArgs());
         logger.info("Despues lanzar la excepcion " + method + " Con los argumentos " + args);
     }
 
-    @Around("greatingLoggerPointCut()")
+    @Around("GreatingServicePointCuts.greatingLoggerPointCut()")
     public Object loggerAround(ProceedingJoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());

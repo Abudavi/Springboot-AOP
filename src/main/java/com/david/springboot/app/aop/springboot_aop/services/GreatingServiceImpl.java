@@ -12,4 +12,9 @@ public class GreatingServiceImpl implements GreatingServices {
         return greating;
     }
 
+    @Override
+    public String sayHelloError(String person, String phrase) {
+        throw new RuntimeException("algun error");
+    }
+
 }

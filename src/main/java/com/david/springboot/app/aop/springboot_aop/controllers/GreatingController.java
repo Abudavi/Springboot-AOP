@@ -22,4 +22,10 @@ public class GreatingController {
         return ResponseEntity.ok(Collections.singletonMap("greating", greating.sayHello("pepe", "Hola que tal")));
     }
 
+    @GetMapping("/greatingError")
+    public ResponseEntity<?> greatingError() {
+
+        return ResponseEntity.ok(Collections.singletonMap("greating", greating.sayHelloError("pepe", "Hola que tal")));
+    }
+
 }
